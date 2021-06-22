@@ -1,38 +1,38 @@
 package com.markmzy.service;
 
-import com.markmzy.model.User;
+import com.markmzy.model.Menu;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
 /**
  * <p>
- * 用户信息表 服务类
+ * 菜单信息表 服务类
  * </p>
  *
  * @author Zhiyue Ma
  * @since 2021-06-22
  */
-public interface IUserService extends IService<User> {
+public interface IMenuService extends IService<Menu> {
 
     /**
-     * 查询用户信息表分页数据
+     * 查询菜单信息表分页数据
      *
      * @param page      页码
      * @param pageCount 每页条数
-     * @return IPage<User>
+     * @return IPage<Menu>
      */
-    IPage<User> findListByPage(Integer page, Integer pageCount);
+    IPage<Menu> findListByPage(Integer page, Integer pageCount);
 
     /**
-     * 添加用户信息表
+     * 添加菜单信息表
      *
-     * @param user 用户信息表
+     * @param menu 菜单信息表
      * @return int
      */
-    int add(User user);
+    int add(Menu menu);
 
     /**
-     * 删除用户信息表
+     * 删除菜单信息表
      *
      * @param id 主键
      * @return int
@@ -40,18 +40,18 @@ public interface IUserService extends IService<User> {
     int delete(Long id);
 
     /**
-     * 修改用户信息表
+     * 修改菜单信息表
      *
-     * @param user 用户信息表
+     * @param menu 菜单信息表
      * @return int
      */
-    int updateData(User user);
+    int updateData(Menu menu);
 
     /**
      * id查询数据
      *
      * @param id id
-     * @return User
+     * @return Menu
      */
-    User findById(Long id);
+    Menu findById(Long id);
 }

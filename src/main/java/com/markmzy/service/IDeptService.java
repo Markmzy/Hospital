@@ -1,38 +1,38 @@
 package com.markmzy.service;
 
-import com.markmzy.model.User;
+import com.markmzy.model.Dept;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
 /**
  * <p>
- * 用户信息表 服务类
+ * 科室 服务类
  * </p>
  *
  * @author Zhiyue Ma
  * @since 2021-06-22
  */
-public interface IUserService extends IService<User> {
+public interface IDeptService extends IService<Dept> {
 
     /**
-     * 查询用户信息表分页数据
+     * 查询科室分页数据
      *
      * @param page      页码
      * @param pageCount 每页条数
-     * @return IPage<User>
+     * @return IPage<Dept>
      */
-    IPage<User> findListByPage(Integer page, Integer pageCount);
+    IPage<Dept> findListByPage(Integer page, Integer pageCount);
 
     /**
-     * 添加用户信息表
+     * 添加科室
      *
-     * @param user 用户信息表
+     * @param dept 科室
      * @return int
      */
-    int add(User user);
+    int add(Dept dept);
 
     /**
-     * 删除用户信息表
+     * 删除科室
      *
      * @param id 主键
      * @return int
@@ -40,18 +40,18 @@ public interface IUserService extends IService<User> {
     int delete(Long id);
 
     /**
-     * 修改用户信息表
+     * 修改科室
      *
-     * @param user 用户信息表
+     * @param dept 科室
      * @return int
      */
-    int updateData(User user);
+    int updateData(Dept dept);
 
     /**
      * id查询数据
      *
      * @param id id
-     * @return User
+     * @return Dept
      */
-    User findById(Long id);
+    Dept findById(Long id);
 }
