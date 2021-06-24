@@ -1,8 +1,8 @@
 package com.markmzy.service;
 
-import com.markmzy.model.PatientInfo;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.markmzy.model.PatientInfo;
 
 /**
  * <p>
@@ -12,7 +12,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
  * @author Zhiyue Ma
  * @since 2021-06-22
  */
-public interface IPatientInfoService extends IService<PatientInfo> {
+public interface IPatientInfoService extends IService<PatientInfo>
+{
 
     /**
      * 查询病人信息表分页数据

@@ -1,8 +1,8 @@
 package com.markmzy.service;
 
-import com.markmzy.model.Exchange;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.markmzy.model.Exchange;
 
 /**
  * <p>
@@ -12,7 +12,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
  * @author Zhiyue Ma
  * @since 2021-06-22
  */
-public interface IExchangeService extends IService<Exchange> {
+public interface IExchangeService extends IService<Exchange>
+{
 
     /**
      * 查询调休记录信息 分页数据
@@ -24,15 +25,15 @@ public interface IExchangeService extends IService<Exchange> {
     IPage<Exchange> findListByPage(Integer page, Integer pageCount);
 
     /**
-     * 添加调休记录信息 
+     * 添加调休记录信息
      *
-     * @param exchange 调休记录信息 
+     * @param exchange 调休记录信息
      * @return int
      */
     int add(Exchange exchange);
 
     /**
-     * 删除调休记录信息 
+     * 删除调休记录信息
      *
      * @param id 主键
      * @return int
@@ -40,9 +41,9 @@ public interface IExchangeService extends IService<Exchange> {
     int delete(Long id);
 
     /**
-     * 修改调休记录信息 
+     * 修改调休记录信息
      *
-     * @param exchange 调休记录信息 
+     * @param exchange 调休记录信息
      * @return int
      */
     int updateData(Exchange exchange);

@@ -1,13 +1,13 @@
 package com.markmzy.service.impl;
 
-import com.markmzy.model.WorkSetting;
-import com.markmzy.dao.WorkSettingMapper;
-import com.markmzy.service.IWorkSettingService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.markmzy.dao.WorkSettingMapper;
+import com.markmzy.model.WorkSetting;
+import com.markmzy.service.IWorkSettingService;
+import org.springframework.stereotype.Service;
 
 /**
  * <p>
@@ -18,33 +18,39 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
  * @since 2021-06-22
  */
 @Service
-public class WorkSettingServiceImpl extends ServiceImpl<WorkSettingMapper, WorkSetting> implements IWorkSettingService {
+public class WorkSettingServiceImpl extends ServiceImpl<WorkSettingMapper, WorkSetting> implements IWorkSettingService
+{
 
     @Override
-    public  IPage<WorkSetting> findListByPage(Integer page, Integer pageCount){
+    public IPage<WorkSetting> findListByPage(Integer page, Integer pageCount)
+    {
         IPage<WorkSetting> wherePage = new Page<>(page, pageCount);
         WorkSetting where = new WorkSetting();
 
-        return   baseMapper.selectPage(wherePage, Wrappers.query(where));
+        return baseMapper.selectPage(wherePage, Wrappers.query(where));
     }
 
     @Override
-    public int add(WorkSetting workSetting){
+    public int add(WorkSetting workSetting)
+    {
         return baseMapper.insert(workSetting);
     }
 
     @Override
-    public int delete(Long id){
+    public int delete(Long id)
+    {
         return baseMapper.deleteById(id);
     }
 
     @Override
-    public int updateData(WorkSetting workSetting){
+    public int updateData(WorkSetting workSetting)
+    {
         return baseMapper.updateById(workSetting);
     }
 
     @Override
-    public WorkSetting findById(Long id){
-        return  baseMapper.selectById(id);
+    public WorkSetting findById(Long id)
+    {
+        return baseMapper.selectById(id);
     }
 }

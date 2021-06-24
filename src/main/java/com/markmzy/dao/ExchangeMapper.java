@@ -1,7 +1,7 @@
 package com.markmzy.dao;
 
-import com.markmzy.model.Exchange;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.markmzy.model.Exchange;
 
 /**
  * <p>
@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author Zhiyue Ma
  * @since 2021-06-22
  */
-public interface ExchangeMapper extends BaseMapper<Exchange> {
+public interface ExchangeMapper extends BaseMapper<Exchange>
+{
 
 }

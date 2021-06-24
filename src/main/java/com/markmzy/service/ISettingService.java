@@ -1,8 +1,8 @@
 package com.markmzy.service;
 
-import com.markmzy.model.Setting;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.markmzy.model.Setting;
 
 /**
  * <p>
@@ -12,7 +12,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
  * @author Zhiyue Ma
  * @since 2021-06-22
  */
-public interface ISettingService extends IService<Setting> {
+public interface ISettingService extends IService<Setting>
+{
 
     /**
      * 查询每月的自动生成排班设置，管理员可以根据生成的信息特殊处理分页数据

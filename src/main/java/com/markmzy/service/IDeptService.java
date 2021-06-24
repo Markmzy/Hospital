@@ -1,8 +1,11 @@
 package com.markmzy.service;
 
-import com.markmzy.model.Dept;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.github.pagehelper.PageInfo;
+import com.markmzy.model.Dept;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,7 +15,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
  * @author Zhiyue Ma
  * @since 2021-06-22
  */
-public interface IDeptService extends IService<Dept> {
+public interface IDeptService extends IService<Dept>
+{
+
+    PageInfo<Dept> queryDeptAll(int pageNum, int pageSize, Dept dept);
 
     /**
      * 查询科室分页数据
@@ -37,7 +43,7 @@ public interface IDeptService extends IService<Dept> {
      * @param id 主键
      * @return int
      */
-    int delete(Long id);
+    int delete(Integer id);
 
     /**
      * 修改科室
@@ -53,5 +59,8 @@ public interface IDeptService extends IService<Dept> {
      * @param id id
      * @return Dept
      */
-    Dept findById(Long id);
+    Dept findById(Integer id);
+
+
+    List<Dept> queryListByPid(Integer parentId);
 }

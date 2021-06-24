@@ -1,13 +1,13 @@
 package com.markmzy.service.impl;
 
-import com.markmzy.model.RoleMenu;
-import com.markmzy.dao.RoleMenuMapper;
-import com.markmzy.service.IRoleMenuService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.markmzy.dao.RoleMenuMapper;
+import com.markmzy.model.RoleMenu;
+import com.markmzy.service.IRoleMenuService;
+import org.springframework.stereotype.Service;
 
 /**
  * <p>
@@ -18,33 +18,39 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
  * @since 2021-06-22
  */
 @Service
-public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> implements IRoleMenuService {
+public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> implements IRoleMenuService
+{
 
     @Override
-    public  IPage<RoleMenu> findListByPage(Integer page, Integer pageCount){
+    public IPage<RoleMenu> findListByPage(Integer page, Integer pageCount)
+    {
         IPage<RoleMenu> wherePage = new Page<>(page, pageCount);
         RoleMenu where = new RoleMenu();
 
-        return   baseMapper.selectPage(wherePage, Wrappers.query(where));
+        return baseMapper.selectPage(wherePage, Wrappers.query(where));
     }
 
     @Override
-    public int add(RoleMenu roleMenu){
+    public int add(RoleMenu roleMenu)
+    {
         return baseMapper.insert(roleMenu);
     }
 
     @Override
-    public int delete(Long id){
+    public int delete(Long id)
+    {
         return baseMapper.deleteById(id);
     }
 
     @Override
-    public int updateData(RoleMenu roleMenu){
+    public int updateData(RoleMenu roleMenu)
+    {
         return baseMapper.updateById(roleMenu);
     }
 
     @Override
-    public RoleMenu findById(Long id){
-        return  baseMapper.selectById(id);
+    public RoleMenu findById(Long id)
+    {
+        return baseMapper.selectById(id);
     }
 }

@@ -1,8 +1,8 @@
 package com.markmzy.service;
 
-import com.markmzy.model.OrderInfo;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.markmzy.model.OrderInfo;
 
 /**
  * <p>
@@ -12,7 +12,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
  * @author Zhiyue Ma
  * @since 2021-06-22
  */
-public interface IOrderInfoService extends IService<OrderInfo> {
+public interface IOrderInfoService extends IService<OrderInfo>
+{
 
     /**
      * 查询病人的预约记录分页数据

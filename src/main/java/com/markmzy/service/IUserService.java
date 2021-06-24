@@ -1,8 +1,8 @@
 package com.markmzy.service;
 
-import com.markmzy.model.User;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.markmzy.model.User;
 
 /**
  * <p>
@@ -12,7 +12,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
  * @author Zhiyue Ma
  * @since 2021-06-22
  */
-public interface IUserService extends IService<User> {
+public interface IUserService extends IService<User>
+{
 
     /**
      * 查询用户信息表分页数据
@@ -37,7 +38,7 @@ public interface IUserService extends IService<User> {
      * @param id 主键
      * @return int
      */
-    int delete(Long id);
+    int delete(Integer id);
 
     /**
      * 修改用户信息表
@@ -53,5 +54,7 @@ public interface IUserService extends IService<User> {
      * @param id id
      * @return User
      */
-    User findById(Long id);
+    User findById(Integer id);
+
+    User findUserByNameAndPwd(User user);
 }

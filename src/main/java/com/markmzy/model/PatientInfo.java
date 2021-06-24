@@ -1,15 +1,16 @@
 package com.markmzy.model;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -23,8 +24,9 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("patient_info")
-@ApiModel(value="PatientInfo对象", description="病人信息表")
-public class PatientInfo implements Serializable {
+@ApiModel(value = "PatientInfo对象", description = "病人信息表")
+public class PatientInfo implements Serializable
+{
 
     private static final long serialVersionUID = 1L;
 

@@ -1,7 +1,7 @@
 package com.markmzy.dao;
 
-import com.markmzy.model.OrderInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.markmzy.model.OrderInfo;
 
 /**
  * <p>
@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author Zhiyue Ma
  * @since 2021-06-22
  */
-public interface OrderInfoMapper extends BaseMapper<OrderInfo> {
+public interface OrderInfoMapper extends BaseMapper<OrderInfo>
+{
 
 }

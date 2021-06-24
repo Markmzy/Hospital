@@ -1,8 +1,8 @@
 package com.markmzy.service;
 
-import com.markmzy.model.WorkSetting;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.markmzy.model.WorkSetting;
 
 /**
  * <p>
@@ -12,7 +12,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
  * @author Zhiyue Ma
  * @since 2021-06-22
  */
-public interface IWorkSettingService extends IService<WorkSetting> {
+public interface IWorkSettingService extends IService<WorkSetting>
+{
 
     /**
      * 查询医生排班的默认设置，用来初始化处理信息，主要按周1到周五排班配置，后续每月周一到周五均按照这个初始化医生上班时间分页数据
