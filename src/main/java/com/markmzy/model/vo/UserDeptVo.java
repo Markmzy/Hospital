@@ -1,34 +1,22 @@
-package com.markmzy.model;
+package com.markmzy.model.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * <p>
- * 用户信息表
+ * 用户部门Vo表
  * </p>
  *
  * @author Zhiyue Ma
- * @since 2021-06-22
+ * @since 2021-06-24
  */
+
 @Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-@ApiModel(value = "User对象", description = "用户信息表")
-public class User implements Serializable
+public class UserDeptVo
 {
-
-    private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     private String username;
@@ -36,6 +24,8 @@ public class User implements Serializable
     private String password;
 
     private Integer deptId;
+
+    private String deptName; // 为了拿到名字
 
     private String roleName;
 

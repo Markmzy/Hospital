@@ -1,6 +1,6 @@
 package com.markmzy.jwt;
 
-import com.markmzy.model.vo.UserVo;
+import com.markmzy.model.vo.UserLoginVo;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -18,16 +18,16 @@ public class JWTUtil
     /**
      * 生成token
      */
-    public static String creatJWT(UserVo userVo)
+    public static String creatJWT(UserLoginVo userLoginVo)
     {
         // 判断用户信息
-        if (userVo == null || userVo.getId() == null || userVo.getUsername() == null)
+        if (userLoginVo == null || userLoginVo.getId() == null || userLoginVo.getUsername() == null)
             return null;
 
         return Jwts.builder()
-                .claim("id", userVo.getId())
-                .claim("id", userVo.getUsername())
-                .claim("id", userVo.getRoleName())
+                .claim("id", userLoginVo.getId())
+                .claim("id", userLoginVo.getUsername())
+                .claim("id", userLoginVo.getRoleName())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expireTime))
                 .signWith(SignatureAlgorithm.HS256, key)
@@ -100,7 +100,7 @@ public class JWTUtil
 
 //    public static void main(String[] args)
 //    {
-//        UserVo userVo = new UserVo();
+//        UserLoginVo userVo = new UserLoginVo();
 //        userVo.setId(14);
 //        userVo.setUsername("saisai");
 //        userVo.setRoleName("1");

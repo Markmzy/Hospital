@@ -2,7 +2,10 @@ package com.markmzy.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.markmzy.model.User;
+import com.markmzy.model.vo.UserDeptVo;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * <p>
@@ -20,4 +23,9 @@ public interface UserMapper extends BaseMapper<User>
      */
 
     User findUserByNameAndPwd(User user);
+
+    /**
+     * 查询所有用户
+     */
+    List<UserDeptVo> queryUserAll(UserDeptVo userDeptVo);
 }

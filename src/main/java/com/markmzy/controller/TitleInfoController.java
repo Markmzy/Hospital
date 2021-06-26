@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -23,7 +24,7 @@ import javax.annotation.Resource;
  */
 @Api(tags = {"医生职称信息表"})
 @RestController
-@RequestMapping("/title-info")
+@RequestMapping("/titleInfo")
 public class TitleInfoController
 {
 
@@ -32,6 +33,11 @@ public class TitleInfoController
     @Resource
     private ITitleInfoService titleInfoService;
 
+    @RequestMapping("/titleAll")
+    public List<TitleInfo> titleAll()
+    {
+        return titleInfoService.list();
+    }
 
     @ApiOperation(value = "新增医生职称信息表")
     @PostMapping()

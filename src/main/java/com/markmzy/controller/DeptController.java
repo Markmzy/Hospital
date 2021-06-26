@@ -2,6 +2,8 @@ package com.markmzy.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.markmzy.model.Dept;
+import com.markmzy.model.Node;
+import com.markmzy.model.vo.DeptVo;
 import com.markmzy.service.IDeptService;
 import com.markmzy.util.JsonObject;
 import com.markmzy.util.R;
@@ -39,7 +41,7 @@ public class DeptController
     public R add(@RequestBody Dept dept)
     {
         if (deptService.add(dept) > 0)
-            return R.ok();
+            return R.ok("新增科室成功");
 
         return R.fail("新增科室失败");
     }
@@ -60,38 +62,28 @@ public class DeptController
             {
                 Integer ids = d.getId();
                 deptService.delete(ids);
-
             }
 
-            if(deptService.delete(Integer.parseInt(idValue)) > 0)//当前节点
-                return R.ok();
+            if (deptService.delete(Integer.parseInt(idValue)) > 0)//当前节点
+                return R.ok("删除科室成功");
         }
         else
         {
-            if(deptService.delete(Integer.parseInt(idValue)) > 0)
-                return R.ok();
+            if (deptService.delete(Integer.parseInt(idValue)) > 0)
+                return R.ok("删除科室成功");
         }
         return R.fail("删除科室失败");
     }
 
-    @ApiOperation(value = "更新科室")
+    @ApiOperation(value = "修改科室")
     @RequestMapping("/update")
     public R update(@RequestBody Dept dept)
     {
         int nums = deptService.updateData(dept);
         if (nums > 0)
-            return R.ok();
+            return R.ok("修改科室成功");
 
         return R.fail("修改科室失败");
-    }
-
-    @RequestMapping("/queryDeptAll")
-    public JsonObject queryDeptAll(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "15") int pageSize, Dept dept)
-    {
-        PageInfo<Dept> pageInfo = deptService.queryDeptAll(pageNum, pageSize, dept);
-        JsonObject object = new JsonObject();
-        object.setData(pageInfo.getList());
-        return object;
     }
 
     @ApiOperation(value = "id查询科室")
@@ -99,6 +91,23 @@ public class DeptController
     public Dept findById(@PathVariable Integer id)
     {
         return deptService.findById(id);
+    }
+
+    @ApiOperation(value = "查询所有科室")
+    @RequestMapping("/queryDeptAll")
+    public JsonObject queryDeptAll(@RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "15") int pageSize)
+    {
+        PageInfo<DeptVo> pageInfo = deptService.queryDeptAll(pageNum, pageSize);
+        JsonObject object = new JsonObject();
+        object.setData(pageInfo.getList());
+        return object;
+    }
+
+    @ApiOperation(value = "查询树结构")
+    @RequestMapping("/queryDeptTree")
+    public List<Node> queryDeptTree()
+    {
+        return deptService.queryDeptTree();
     }
 
 }

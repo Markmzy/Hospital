@@ -2,7 +2,7 @@ package com.markmzy.controller;
 
 import com.markmzy.jwt.JWTUtil;
 import com.markmzy.model.User;
-import com.markmzy.model.vo.UserVo;
+import com.markmzy.model.vo.UserLoginVo;
 import com.markmzy.service.IUserService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,12 +40,12 @@ public class LoginController
             if (user != null)
             {
                 // 生成token信息
-                UserVo userVo = new UserVo();
-                userVo.setId(user.getId());
-                userVo.setUsername(username);
-                userVo.setRoleName(roleName);
+                UserLoginVo userLoginVo = new UserLoginVo();
+                userLoginVo.setId(user.getId());
+                userLoginVo.setUsername(username);
+                userLoginVo.setRoleName(roleName);
 
-                String token = JWTUtil.creatJWT(userVo);
+                String token = JWTUtil.creatJWT(userLoginVo);
                 m.put("token", token);
                 m.put("username", username);
                 m.put("roleName", roleName);

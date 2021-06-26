@@ -8,30 +8,41 @@
         <result column="name" property="name"/>
         <result column="parent_id" property="parentId"/>
         <result column="type" property="type"/>
-        <result column="sort" property="sort"/>
         <result column="status" property="status"/>
+        <result column="building" property="building"/>
+        <result column="room" property="room"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id
-        , name, parent_id, type, sort, status
+        , name, parent_id, type, status, building, room
     </sql>
 
-    <select id="queryDeptAll" parameterType="com.markmzy.model.Dept" resultType="com.markmzy.model.Dept">
-        SELECT *
+    <select id="queryDeptAll" resultType="com.markmzy.model.vo.DeptVo">
+        SELECT dept.id,
+               dept.name,
+               dept.parent_id,
+               dept.status,
+               dept.type,
+               dept.building,
+               dept.room,
+               count(user.id) as num
         FROM dept
-        <where>
-            <if test="name != null and name !='' ">
-                and name like '%${name}%'
-            </if>
-        </where>
+                 LEFT JOIN user ON user.dept_id = dept.id
+        GROUP BY dept.id
     </select>
 
     <select id="queryListByPid" parameterType="java.lang.Integer" resultType="com.markmzy.model.Dept">
         SELECT *
         FROM dept
-        WHERE parent_id = #{parentId}
+        WHERE dept.parent_id = #{parentId}
+    </select>
+
+    <select id="queryDeptTree" resultType="com.markmzy.model.Node">
+        SELECT id, name, parent_id
+        FROM dept
+        ORDER BY id
     </select>
 
 </mapper>

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.markmzy.model.Dept;
+import com.markmzy.model.Node;
+import com.markmzy.model.vo.DeptVo;
 
 import java.util.List;
 
@@ -17,8 +19,6 @@ import java.util.List;
  */
 public interface IDeptService extends IService<Dept>
 {
-
-    PageInfo<Dept> queryDeptAll(int pageNum, int pageSize, Dept dept);
 
     /**
      * 查询科室分页数据
@@ -62,5 +62,22 @@ public interface IDeptService extends IService<Dept>
     Dept findById(Integer id);
 
 
+    /**
+     * 根据父id查询所有科室
+     *
+     * @param parentId 父id
+     * @return List<Dept></Dept>
+     */
     List<Dept> queryListByPid(Integer parentId);
+
+    /**
+     * 分页查询所有科室
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    PageInfo<DeptVo> queryDeptAll(int pageNum, int pageSize);
+
+    List<Node> queryDeptTree();
 }

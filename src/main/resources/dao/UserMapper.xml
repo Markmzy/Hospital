@@ -12,14 +12,11 @@
         <result column="images" property="images"/>
         <result column="realname" property="realname"/>
         <result column="sex" property="sex"/>
+        <result column="date_of_birth" property="dateOfBirth"/>
         <result column="tel" property="tel"/>
         <result column="email" property="email"/>
-        <result column="avatar" property="avatar"/>
         <result column="job_title" property="jobTitle"/>
-        <result column="status" property="status"/>
         <result column="info" property="info"/>
-        <result column="sort" property="sort"/>
-        <result column="del_flag" property="delFlag"/>
         <result column="create_by" property="createBy"/>
         <result column="update_time" property="updateTime"/>
         <result column="create_time" property="createTime"/>
@@ -28,7 +25,7 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id
-        , username, password, dept_id, role_name, images, realname, sex, tel, email, avatar, job_title, status, info, sort, del_flag, create_by, update_time, create_time
+        , username, password, dept_id, role_name, images, realname, sex, date_of_birth, tel, email, job_title, info, create_by, update_time, create_time
     </sql>
 
     <select id="findUserByNameAndPwd" parameterType="com.markmzy.model.User" resultType="com.markmzy.model.User">
@@ -37,6 +34,23 @@
         WHERE username = #{username}
           AND password = #{password}
           AND role_name = #{roleName}
+    </select>
+
+    <select id="queryUserAll" parameterType="com.markmzy.model.vo.UserDeptVo"
+            resultType="com.markmzy.model.vo.UserDeptVo">
+        SELECT user.*, dept.name as deptName
+        FROM user LEFT JOIN dept ON user.dept_id = dept.id
+        <where>
+            <if test="realname != null and realname != ''">
+                and realname like '%${realname}%'
+            </if>
+            <if test="deptId != null and deptId != ''">
+                and dept_id = #{deptId}
+            </if>
+            <if test="jobTitle != null and jobTitle != ''">
+                and job_title like '%${jobTitle}%'
+            </if>
+        </where>
     </select>
 
 </mapper>

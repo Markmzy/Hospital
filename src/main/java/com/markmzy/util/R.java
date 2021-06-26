@@ -37,6 +37,11 @@ public class R implements Serializable
         return new R(Constants.OK_CODE, Constants.OK_MSG, null);
     }
 
+    public static R ok(String msg)
+    {
+        return new R(Constants.OK_CODE, msg, null);
+    }
+
     public static R ok(Object data)
     {
         return new R(Constants.OK_CODE, Constants.OK_MSG, data);

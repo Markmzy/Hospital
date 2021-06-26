@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * <p>
- * 用户信息Vo表
+ * 用户登陆Vo表
  * </p>
  *
  * @author Zhiyue Ma
@@ -12,7 +12,7 @@ import lombok.Data;
  */
 
 @Data
-public class UserVo
+public class UserLoginVo
 {
     private Integer id;
     private String username;

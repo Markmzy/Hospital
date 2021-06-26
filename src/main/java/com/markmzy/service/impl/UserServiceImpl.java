@@ -4,11 +4,16 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.markmzy.dao.UserMapper;
 import com.markmzy.model.User;
+import com.markmzy.model.vo.UserDeptVo;
 import com.markmzy.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -61,5 +66,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public User findUserByNameAndPwd(User user)
     {
         return userMapper.findUserByNameAndPwd(user);
+    }
+
+    @Override
+    public PageInfo<UserDeptVo> queryUserAll(UserDeptVo userDeptVo, int pageNum, int pageSize)
+    {
+        PageHelper.startPage(pageNum, pageSize);
+        List<UserDeptVo> list = userMapper.queryUserAll(userDeptVo);
+        return new PageInfo<>(list);
     }
 }

@@ -16,6 +16,5 @@ public class Node
     private String name;
     private Boolean open = false;//默认折叠
     List<Node> children = new ArrayList<>();
-    ;
     private Boolean checked = false;//是否选中
 }

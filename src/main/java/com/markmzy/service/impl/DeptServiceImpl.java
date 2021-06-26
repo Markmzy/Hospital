@@ -8,7 +8,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.markmzy.dao.DeptMapper;
 import com.markmzy.model.Dept;
+import com.markmzy.model.Node;
+import com.markmzy.model.vo.DeptVo;
 import com.markmzy.service.IDeptService;
+import com.markmzy.util.TreeUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,14 +31,6 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements ID
 
     @Resource
     private DeptMapper deptMapper;
-
-    @Override
-    public PageInfo<Dept> queryDeptAll(int pageNum, int pageSize, Dept dept)
-    {
-        PageHelper.startPage(pageNum, pageSize);
-        List<Dept> list = deptMapper.queryDeptAll(dept);
-        return new PageInfo<>(list);
-    }
 
     @Override
     public IPage<Dept> findListByPage(Integer page, Integer pageCount)
@@ -74,5 +69,20 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements ID
     public List<Dept> queryListByPid(Integer parentId)
     {
         return deptMapper.queryListByPid(parentId);
+    }
+
+    @Override
+    public PageInfo<DeptVo> queryDeptAll(int pageNum, int pageSize)
+    {
+        PageHelper.startPage(pageNum, pageSize);
+        List<DeptVo> list = deptMapper.queryDeptAll();
+        return new PageInfo<>(list);
+    }
+
+    @Override
+    public List<Node> queryDeptTree()
+    {
+        List<Node> nodeList = deptMapper.queryDeptTree();
+        return TreeUtil.build(nodeList);
     }
 }

@@ -3,7 +3,6 @@ package com.markmzy.model;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -36,10 +35,11 @@ public class Dept implements Serializable
 
     private Integer type;
 
-    @ApiModelProperty(value = "0 代表女 1 代表男")
-    private Integer sort;
-
     private Integer status;
+
+    private String building;
+
+    private Integer room;
 
 
 }
