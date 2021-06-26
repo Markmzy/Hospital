@@ -2,7 +2,10 @@ package com.markmzy.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.markmzy.model.PatientInfo;
+import com.markmzy.model.vo.UserDeptVo;
 
 /**
  * <p>
@@ -38,7 +41,7 @@ public interface IPatientInfoService extends IService<PatientInfo>
      * @param id 主键
      * @return int
      */
-    int delete(Long id);
+    int delete(Integer id);
 
     /**
      * 修改病人信息表
@@ -54,5 +57,10 @@ public interface IPatientInfoService extends IService<PatientInfo>
      * @param id id
      * @return PatientInfo
      */
-    PatientInfo findById(Long id);
+    PatientInfo findById(Integer id);
+
+    /**
+     * 查询所有病人
+     */
+    PageInfo<PatientInfo> queryPatientAll(PatientInfo patient, int pageNum, int pageSize);
 }

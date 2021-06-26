@@ -35,24 +35,21 @@ public class PatientInfo implements Serializable
 
     private String username;
 
-    @ApiModelProperty(value = "0 代表女 1 代表男")
     private String password;
 
     private String realname;
 
     private String sex;
 
+    private String dateOfBirth;
+
     private String tel;
 
     private String email;
 
-    private String jobTitle;
+    private String condition;
 
-    private Integer status;
-
-    private Integer sort;
-
-    private Integer delFlag;
+    private Boolean status;
 
     private String createBy;
 

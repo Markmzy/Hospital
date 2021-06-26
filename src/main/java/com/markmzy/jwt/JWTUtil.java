@@ -9,36 +9,38 @@ import java.util.Date;
 
 public class JWTUtil
 {
-    // 有效时间
-    private static final Long expireTime = 1000 * 60 * 60L;
-
-    // 密钥
+    //设置密钥
     private static final String key = "Markmzy";
+    //有效时间长度  60分钟
+    private static final Long failTime = 1000 * 60 * 30L;
 
     /**
      * 生成token
      */
-    public static String creatJWT(UserLoginVo userLoginVo)
+    public static String createJsonWebToken(UserLoginVo user)
     {
-        // 判断用户信息
-        if (userLoginVo == null || userLoginVo.getId() == null || userLoginVo.getUsername() == null)
+        //判断用户对象信息
+        if (user == null || user.getId() == null || user.getUsername() == null)
+        {
             return null;
+        }
+
+        //生成token对象
 
         return Jwts.builder()
-                .claim("id", userLoginVo.getId())
-                .claim("id", userLoginVo.getUsername())
-                .claim("id", userLoginVo.getRoleName())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expireTime))
+                .claim("id", user.getId())
+                .claim("username", user.getUsername())
+                .claim("roleName", user.getRoleName())
+                .setIssuedAt(new Date())//签发时间
+                .setExpiration(new Date(System.currentTimeMillis() + failTime))
                 .signWith(SignatureAlgorithm.HS256, key)
                 .compact();
     }
 
     /**
-     * 验证token
+     * 验证token是否有效
      */
-
-    public static Claims checkJWT(String token)
+    public static Claims checkJwt(String token)
     {
         try
         {
@@ -47,64 +49,44 @@ public class JWTUtil
         {
             e.printStackTrace();
         }
-
         return null;
     }
 
     /**
      * 获取用户id
      */
-
     public static Integer getUserId(String token)
     {
-        Claims claims = JWTUtil.checkJWT(token);
-        if (claims != null)
-            return (Integer) claims.get("id");
-        else
-            return null;
+        Claims claims = JWTUtil.checkJwt(token);
+        return (Integer) claims.get("id");
     }
 
     /**
      * 获取用户姓名
      */
-
     public static String getUserName(String token)
     {
-        Claims claims = JWTUtil.checkJWT(token);
-        if (claims != null)
-            return (String) claims.get("username");
-        else
-            return null;
+        Claims claims = JWTUtil.checkJwt(token);
+        return (String) claims.get("username");
     }
 
     /**
-     * 获取用户类型
+     * 获取用户姓名
      */
     public static String getRoleName(String token)
     {
-        Claims claims = JWTUtil.checkJWT(token);
-        if (claims != null)
-            return (String) claims.get("roleName");
-        else
-            return null;
+        Claims claims = JWTUtil.checkJwt(token);
+        return (String) claims.get("roleName");
     }
 
     /**
-     * 验证token是否过期
+     * 判断token是否过期
      */
-    public static boolean isTokenExpired(Date times)
+    public static boolean isTokenExpired(String token)
     {
+        Claims claims = JWTUtil.checkJwt(token);
+        Date times = claims.getExpiration();
         return times.before(new Date());
     }
 
-
-//    public static void main(String[] args)
-//    {
-//        UserLoginVo userVo = new UserLoginVo();
-//        userVo.setId(14);
-//        userVo.setUsername("saisai");
-//        userVo.setRoleName("1");
-//        String token = creatJWT(userVo);
-//        System.out.println(token);
-//    }
 }

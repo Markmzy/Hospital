@@ -19,9 +19,9 @@ public class LoginController
     IUserService userService;
 
     @RequestMapping("/login")
-    public Map<String, String> login(@RequestBody Map<String, String> map)
+    public Map login(@RequestBody Map<String, String> map)
     {
-        Map<String, String> m = new HashMap();
+        Map m = new HashMap();
         // 接收前端传过来的信息
         String username = map.get("username");
         String password = map.get("password");
@@ -45,7 +45,7 @@ public class LoginController
                 userLoginVo.setUsername(username);
                 userLoginVo.setRoleName(roleName);
 
-                String token = JWTUtil.creatJWT(userLoginVo);
+                String token = JWTUtil.createJsonWebToken(userLoginVo);
                 m.put("token", token);
                 m.put("username", username);
                 m.put("roleName", roleName);

@@ -99,7 +99,7 @@ public class UserController
         return userService.findById(id);
     }
 
-    @ApiOperation(value = "分页查询所有用户信息")
+    @ApiOperation(value = "分页查询所有用户")
     @RequestMapping("/queryUserAll")
     public JsonObject queryUserAll(UserDeptVo userDeptVo, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "15") int pageSize)
     {

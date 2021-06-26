@@ -24,7 +24,7 @@ import java.util.List;
  */
 @Api(tags = {"医生职称信息表"})
 @RestController
-@RequestMapping("/titleInfo")
+@RequestMapping("/title")
 public class TitleInfoController
 {
 
