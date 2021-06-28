@@ -27,7 +27,7 @@ import javax.annotation.Resource;
 public class RecordInfoController
 {
 
-    private Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Resource
     private IRecordInfoService recordInfoService;

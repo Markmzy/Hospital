@@ -28,7 +28,7 @@ import java.util.List;
 public class TitleInfoController
 {
 
-    private Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Resource
     private ITitleInfoService titleInfoService;

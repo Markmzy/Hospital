@@ -14,8 +14,28 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id
-        , user_id, day, day_time, counts, dept_id
+        id, user_id, day, day_time, counts, dept_id
     </sql>
+
+    <select id="querySettingListByUserId" parameterType="int"
+            resultType="com.markmzy.model.Setting">
+        SELECT *
+        FROM setting s
+        WHERE s.user_id = #{userId}
+    </select>
+
+    <delete id="deleteByUserId" parameterType="int">
+        DELETE
+        FROM setting
+        WHERE user_id = #{userId}
+    </delete>
+
+    <select id="getCountsBySet" parameterType="com.markmzy.model.Setting" resultType="int">
+        SELECT counts
+        FROM setting s
+        WHERE s.`day` = #{day}
+          AND day_time = #{dayTime}
+          AND s.user_id = #{userId}
+    </select>
 
 </mapper>

@@ -29,7 +29,7 @@ public class Setting implements Serializable
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private String userId;
+    private Integer userId;
 
     private String day;
 
@@ -38,6 +38,18 @@ public class Setting implements Serializable
     private Integer counts;
 
     private Integer deptId;
+
+    public Setting()
+    {
+    }
+
+    public Setting(Integer userId, String day, String dayTime, Integer counts)
+    {
+        this.userId = userId;
+        this.day = day;
+        this.dayTime = dayTime;
+        this.counts = counts;
+    }
 
 
 }

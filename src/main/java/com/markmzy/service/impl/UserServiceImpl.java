@@ -7,12 +7,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.markmzy.dao.UserMapper;
+import com.markmzy.model.TongJi;
 import com.markmzy.model.User;
 import com.markmzy.model.vo.UserDeptVo;
 import com.markmzy.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService
 {
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @Override
@@ -74,5 +75,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         PageHelper.startPage(pageNum, pageSize);
         List<UserDeptVo> list = userMapper.queryUserAll(userDeptVo);
         return new PageInfo<>(list);
+    }
+
+    @Override
+    public List<TongJi> queryTongjiCounts()
+    {
+        return userMapper.queryTongjiCounts();
     }
 }

@@ -2,10 +2,9 @@ package com.markmzy.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.markmzy.model.PatientInfo;
-import com.markmzy.model.vo.UserDeptVo;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -63,4 +62,8 @@ public interface IPatientInfoService extends IService<PatientInfo>
      * 查询所有病人
      */
     PageInfo<PatientInfo> queryPatientAll(PatientInfo patient, int pageNum, int pageSize);
+
+    PatientInfo queryPatByUsernameAndPassword(String username, String password);
+
+    PatientInfo queryPatByName(@Param("username") String username);
 }

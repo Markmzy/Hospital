@@ -48,7 +48,7 @@ public class DateUtil
         int day = aCalendar.getActualMaximum(Calendar.DATE);
         for (int i = 1; i <= day; i++)
         {
-            String aDate = String.valueOf(year) + "-" + month + "-" + i;
+            String aDate = year + "-" + month + "-" + i;
             Date date = null;
             try
             {

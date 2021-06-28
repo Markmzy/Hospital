@@ -3,8 +3,11 @@ package com.markmzy.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
+import com.markmzy.model.TongJi;
 import com.markmzy.model.User;
 import com.markmzy.model.vo.UserDeptVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -61,4 +64,6 @@ public interface IUserService extends IService<User>
     User findUserByNameAndPwd(User user);
 
     PageInfo<UserDeptVo> queryUserAll(UserDeptVo userDeptVo, int pageNum, int pageSize);
+
+    List<TongJi> queryTongjiCounts();
 }

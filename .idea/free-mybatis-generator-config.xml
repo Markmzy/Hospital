@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PersistentConfig">
+    <option name="initConfig">
+      <map>
+        <entry key="initConfig">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoPackage" value="com.markmzy.dao" />
+              <option name="daoPostfix" value="Mapper" />
+              <option name="modelPackage" value="com.mark.model" />
+              <option name="name" value="initConfig" />
+              <option name="needForUpdate" value="true" />
+              <option name="offsetLimit" value="true" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="projectFolder" value="$PROJECT_DIR$" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlPackage" value="dao" />
+            </Config>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

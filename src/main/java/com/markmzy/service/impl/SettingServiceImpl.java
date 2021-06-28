@@ -9,6 +9,9 @@ import com.markmzy.model.Setting;
 import com.markmzy.service.ISettingService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 /**
  * <p>
  * 每月的自动生成排班设置，管理员可以根据生成的信息特殊处理 服务实现类
@@ -20,6 +23,31 @@ import org.springframework.stereotype.Service;
 @Service
 public class SettingServiceImpl extends ServiceImpl<SettingMapper, Setting> implements ISettingService
 {
+
+    @Resource
+    private SettingMapper settingMapper;
+
+    @Override
+    public List<Setting> querySettingListByUserId(Integer userId)
+    {
+        return settingMapper.querySettingListByUserId(userId);
+    }
+
+    @Override
+    public int deleteByUserId(Integer userId)
+    {
+        return settingMapper.deleteByUserId(userId);
+    }
+
+    @Override
+    public Integer getCountsBySet(Integer userId, String day, String dayTime)
+    {
+        Setting setting = new Setting();
+        setting.setDay(day);
+        setting.setUserId(userId);
+        setting.setDayTime(dayTime);
+        return settingMapper.getCountsBySet(setting);
+    }
 
     @Override
     public IPage<Setting> findListByPage(Integer page, Integer pageCount)

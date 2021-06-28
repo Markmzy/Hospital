@@ -2,6 +2,7 @@ package com.markmzy.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.pagehelper.PageInfo;
+import com.markmzy.model.TongJi;
 import com.markmzy.model.User;
 import com.markmzy.model.vo.UserDeptVo;
 import com.markmzy.service.IUserService;
@@ -16,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,7 +33,7 @@ import java.util.List;
 public class UserController
 {
 
-    private Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Resource
     private IUserService userService;
@@ -52,18 +52,15 @@ public class UserController
 
     @ApiOperation(value = "删除用户信息")
     @RequestMapping("/deleteByIds")
-    public R delete(Integer ids)
+    public R delete(Integer[] ids)
     {
-        // 把字符串转成集合对象
-        List<Integer> list = Arrays.asList(ids);
-
         int n = 0;
-        for (Integer i : list)
+        for(Integer id : ids)
         {
-            n += userService.delete(i);
+            n += userService.delete(id);
         }
 
-        if (n > 0)
+        if(n > 0)
             return R.ok("删除用户成功");
 
         return R.fail("删除用户失败");
@@ -111,5 +108,18 @@ public class UserController
         object.setData(pageInfo.getList());
         return object;
     }
+
+    /**
+     * 统计接口
+     *
+     * @param
+     * @return
+     */
+    @RequestMapping("/queryTongjiList")
+    public List<TongJi> queryTongjiList()
+    {
+        return userService.queryTongjiCounts();
+    }
+
 
 }

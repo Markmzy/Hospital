@@ -3,7 +3,6 @@ package com.markmzy.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.pagehelper.PageInfo;
 import com.markmzy.model.PatientInfo;
-import com.markmzy.model.vo.UserDeptVo;
 import com.markmzy.service.IPatientInfoService;
 import com.markmzy.util.JsonObject;
 import com.markmzy.util.R;
@@ -16,8 +15,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -33,35 +32,55 @@ import java.util.List;
 public class PatientInfoController
 {
 
-    private Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Resource
     private IPatientInfoService patientInfoService;
 
     @ApiOperation(value = "新增病人信息表")
-    @PostMapping()
-    public int add(@RequestBody PatientInfo patientInfo)
+    @RequestMapping("/add")
+    public R add(@RequestBody PatientInfo patientInfo)
     {
-        return patientInfoService.add(patientInfo);
+        if(patientInfoService.add(patientInfo) > 0)
+        {
+            return R.ok("注册成功");
+        }
+
+        return R.fail("注册失败");
     }
 
     @ApiOperation(value = "删除病人信息表")
     @RequestMapping("/deleteByIds")
-    public R delete(Integer ids)
+    public R delete(Integer[] ids)
     {
-        // 把字符串转成集合对象
-        List<Integer> list = Arrays.asList(ids);
-
         int n = 0;
-        for (Integer i : list)
+        for(Integer id : ids)
         {
-            n += patientInfoService.delete(i);
+            n += patientInfoService.delete(id);
         }
 
-        if (n > 0)
+        if(n > 0)
             return R.ok("删除病人成功");
 
         return R.fail("删除病人失败");
+    }
+
+    @RequestMapping("/getUserByName")
+    public Map getUserByName(@RequestBody Map<String, String> map)
+    {
+        Map m = new HashMap<>();
+        PatientInfo info = patientInfoService.queryPatByName(map.get("username"));
+        if(info != null)
+        {
+            m.put("code", 100);
+            m.put("msg", "该用户名已存在");
+        }
+        else
+        {
+            m.put("code", 101);
+            m.put("msg", "此用户名可以使用");
+        }
+        return m;
     }
 
     @ApiOperation(value = "更新病人信息表")

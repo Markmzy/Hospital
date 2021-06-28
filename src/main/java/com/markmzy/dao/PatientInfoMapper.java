@@ -2,6 +2,7 @@ package com.markmzy.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.markmzy.model.PatientInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,4 +17,8 @@ import java.util.List;
 public interface PatientInfoMapper extends BaseMapper<PatientInfo>
 {
     List<PatientInfo> queryPatientAll(PatientInfo patient);
+
+    PatientInfo queryPatByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+
+    PatientInfo queryPatByName(@Param("username") String username);
 }

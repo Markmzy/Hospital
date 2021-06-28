@@ -26,7 +26,7 @@ import java.util.List;
 public class PatientInfoServiceImpl extends ServiceImpl<PatientInfoMapper, PatientInfo> implements IPatientInfoService
 {
     @Resource
-    PatientInfoMapper patientInfoMapper;
+    private PatientInfoMapper patientInfoMapper;
 
     @Override
     public IPage<PatientInfo> findListByPage(Integer page, Integer pageCount)
@@ -67,5 +67,17 @@ public class PatientInfoServiceImpl extends ServiceImpl<PatientInfoMapper, Patie
         PageHelper.startPage(pageNum, pageSize);
         List<PatientInfo> list = patientInfoMapper.queryPatientAll(patient);
         return new PageInfo<>(list);
+    }
+
+    @Override
+    public PatientInfo queryPatByUsernameAndPassword(String username, String password)
+    {
+        return patientInfoMapper.queryPatByUsernameAndPassword(username, password);
+    }
+
+    @Override
+    public PatientInfo queryPatByName(String username)
+    {
+        return patientInfoMapper.queryPatByName(username);
     }
 }

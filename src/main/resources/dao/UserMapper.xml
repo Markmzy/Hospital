@@ -53,4 +53,12 @@
         </where>
     </select>
 
+    <select id="queryTongjiCounts" resultType="com.markmzy.model.TongJi">
+        SELECT COUNT(*) AS counts, name
+        FROM user u
+                 LEFT JOIN dept d ON d.id = u.dept_id
+        GROUP BY dept_id
+    </select>
+
+
 </mapper>

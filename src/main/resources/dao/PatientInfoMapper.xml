@@ -12,7 +12,7 @@
         <result column="tel" property="tel"/>
         <result column="date_of_birth" property="dateOfBirth"/>
         <result column="email" property="email"/>
-        <result column="condition" property="jobTitle"/>
+        <result column="condition" property="condition"/>
         <result column="status" property="status"/>
         <result column="create_by" property="createBy"/>
         <result column="update_time" property="updateTime"/>
@@ -25,7 +25,8 @@
         , username, password, realname, sex, date_of_birth, tel, email, condition , status, create_by, update_time, create_time
     </sql>
 
-    <select id="queryPatientAll" parameterType="com.markmzy.model.PatientInfo" resultType="com.markmzy.model.PatientInfo">
+    <select id="queryPatientAll" parameterType="com.markmzy.model.PatientInfo"
+            resultType="com.markmzy.model.PatientInfo">
         SELECT *
         FROM patient_info
         <where>
@@ -40,5 +41,19 @@
             </if>
         </where>
     </select>
+
+    <select id="queryPatByUsernameAndPassword" resultType="com.markmzy.model.PatientInfo">
+        SELECT *
+        FROM patient_info info
+        WHERE info.username = #{username}
+          AND password = #{password}
+    </select>
+
+    <select id="queryPatByName" resultType="com.markmzy.model.PatientInfo">
+        SELECT *
+        FROM patient_info
+        WHERE username = #{username}
+    </select>
+
 
 </mapper>

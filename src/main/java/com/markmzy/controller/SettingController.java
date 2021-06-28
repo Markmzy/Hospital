@@ -3,6 +3,7 @@ package com.markmzy.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.markmzy.model.Setting;
 import com.markmzy.service.ISettingService;
+import com.markmzy.util.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.*;
 
 /**
  * <p>
@@ -27,24 +29,162 @@ import javax.annotation.Resource;
 public class SettingController
 {
 
-    private Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Resource
     private ISettingService settingService;
 
+    /**
+     * 根据用户id获取用的设置初始值信息
+     */
+    @RequestMapping("/queryListSettingByUserId")
+    public Map queryListSettingByUserId(@RequestBody Map<String, String> maps)
+    {
+        //获取前端传过来的用户id
+        String userId = maps.get("userId");
+        //返回对象map
+        Map map = new HashMap();
+        for(int i = 1; i <= 7; i++)
+        {
+            map.put("dayup" + i, 0);
+            map.put("daydown" + i, 0);
+        }
+        //根据用id 获取用户设置信息
+        List<Setting> list = settingService.querySettingListByUserId(Integer.parseInt(userId));
+        for(Setting set : list)
+        {
+            String day = set.getDay();
+            String time = set.getDayTime();
+            switch(day)
+            {
+                case "1":
+                    if(time.equals("am"))
+                    {
+                        map.put("dayup1", set.getCounts());
+                    }
+                    else
+                    {
+                        map.put("daydown1", set.getCounts());
+                    }
+                    break;
+                case "2":
+                    if(time.equals("am"))
+                    {
+                        map.put("dayup2", set.getCounts());
+                    }
+                    else
+                    {
+                        map.put("daydown2", set.getCounts());
+                    }
+                    break;
+                case "3":
+                    if(time.equals("am"))
+                    {
+                        map.put("dayup3", set.getCounts());
+                    }
+                    else
+                    {
+                        map.put("daydown3", set.getCounts());
+                    }
+                    break;
+                case "4":
+                    if(time.equals("am"))
+                    {
+                        map.put("dayup4", set.getCounts());
+                    }
+                    else
+                    {
+                        map.put("daydown4", set.getCounts());
+                    }
+                    break;
+                case "5":
+                    if(time.equals("am"))
+                    {
+                        map.put("dayup5", set.getCounts());
+                    }
+                    else
+                    {
+                        map.put("daydown5", set.getCounts());
+                    }
+                    break;
+                case "6":
+                    if(time.equals("am"))
+                    {
+                        map.put("dayup6", set.getCounts());
+                    }
+                    else
+                    {
+                        map.put("daydown6", set.getCounts());
+                    }
+                    break;
+                case "7":
+                    if(time.equals("am"))
+                    {
+                        map.put("dayup7", set.getCounts());
+                    }
+                    else
+                    {
+                        map.put("daydown7", set.getCounts());
+                    }
+                    break;
+            }
+
+        }
+
+        return map;
+
+    }
+
 
     @ApiOperation(value = "新增每月的自动生成排班设置，管理员可以根据生成的信息特殊处理")
-    @PostMapping()
-    public int add(@RequestBody Setting setting)
+    @RequestMapping("/add")
+    public R add(@RequestBody Map<String, String> maps)
     {
-        return settingService.add(setting);
+        String userId = maps.get("userId");
+        //根据id查询是否有信息
+        List<Setting> list = settingService.querySettingListByUserId(Integer.parseInt(userId));
+        for(Setting setting : list)
+        {
+            //获取主键 根据主键删除
+            Integer id = setting.getId();
+            settingService.delete(new Long(id));
+        }
+        //添加新传入的值
+        Collection<Setting> collection = new ArrayList<>();
+        for(int i = 1; i <= 7; i++)
+        {
+            String updata = maps.get("dayup" + i);
+            String downdata = maps.get("daydown" + i);
+            //设置setting对象
+            Setting setup =
+                    new Setting(Integer.parseInt(userId), String.valueOf(i), "am", Integer.parseInt(updata));
+
+            Setting setdown =
+                    new Setting(Integer.parseInt(userId), String.valueOf(i), "pm", Integer.parseInt(downdata));
+            collection.add(setup);
+            collection.add(setdown);
+        }
+
+        //批量添加操作
+        boolean bs = settingService.saveBatch(collection);
+        return R.ok("排班成功");
+
     }
 
     @ApiOperation(value = "删除每月的自动生成排班设置，管理员可以根据生成的信息特殊处理")
-    @DeleteMapping("{id}")
-    public int delete(@PathVariable("id") Long id)
+    @RequestMapping("/deleteByIds")
+    public R delete(@RequestBody Map<String, String> maps)
     {
-        return settingService.delete(id);
+        //把字符串转成集合对象
+        String ids = maps.get("ids");
+        List<String> list = Arrays.asList(ids);
+        for(String idString : list)
+        {
+            settingService.deleteByUserId(Integer.parseInt(idString));
+        }
+
+        return R.ok("删除排班记录成功");
+
     }
 
     @ApiOperation(value = "更新每月的自动生成排班设置，管理员可以根据生成的信息特殊处理")
