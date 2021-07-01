@@ -11,12 +11,60 @@
         <result column="patient_id" property="patientId"/>
         <result column="status" property="status"/>
         <result column="dept_id" property="deptId"/>
+
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id
-        , user_id, day, day_time, patient_id, status, dept_id
+        id, user_id, day, day_time, patient_id, status, dept_id
     </sql>
+
+    <resultMap id="queryOrderInfoByAllMap" type="com.markmzy.model.OrderInfo" extends="BaseResultMap">
+        <association property="user" javaType="com.markmzy.model.User">
+            <id column="id" property="id"></id>
+            <result column="uname" property="realname"></result>
+        </association>
+
+        <association property="patientInfo" javaType="com.markmzy.model.PatientInfo">
+            <id column="id" property="id"></id>
+            <result column="pname" property="realname"></result>
+            <result column="tel" property="tel"></result>
+        </association>
+    </resultMap>
+
+    <select id="queryOrderInfoByAll" parameterType="com.markmzy.model.OrderInfo"
+            resultMap="queryOrderInfoByAllMap">
+        select info.*,u.realname as uname, p.realname as pname, p.tel
+        from order_info info left join `user` u on u.id=info.user_id
+        LEFT JOIN patient_info p on p.id=info.patient_id
+        <where>
+            <if test="patientInfo!=null">
+                <if test="patientInfo.realname!=null and patientInfo.realname!=''">
+                    and p.realname like '%${patientInfo.realname}%'
+                </if>
+                <if test="patientInfo.tel!=null and patientInfo.tel!=''">
+                    and p.tel like '%${patientInfo.tel}%'
+                </if>
+            </if>
+            <if test="status!=null">
+                and info.status= #{status}
+            </if>
+            <if test="userId!=null">
+                and info.user_id= #{userId}
+            </if>
+            <if test="patientId!=null">
+                and info.patient_id= #{patientId}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryByOrderInfo2" resultType="com.markmzy.model.OrderInfo" parameterType="com.markmzy.model.OrderInfo">
+        SELECT *
+        FROM order_info
+        WHERE user_id = #{userId}
+          AND patient_id = #{patientId}
+        ORDER BY id DESC
+        LIMIT 1
+    </select>
 
 </mapper>

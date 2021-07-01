@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -120,6 +121,13 @@ public class PatientInfoController
         object.setCount(pageInfo.getTotal());
         object.setData(pageInfo.getList());
         return object;
+    }
+
+    @RequestMapping("/queryPatientInfoAll")
+    public List<PatientInfo> queryPatientInfoAll()
+    {
+        PageInfo<PatientInfo> pageInfo = patientInfoService.findUserAll(1, 10, null);
+        return pageInfo.getList();
     }
 
 }

@@ -4,10 +4,15 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.markmzy.dao.OrderInfoMapper;
 import com.markmzy.model.OrderInfo;
 import com.markmzy.service.IOrderInfoService;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -20,6 +25,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo> implements IOrderInfoService
 {
+    @Resource
+    private OrderInfoMapper orderInfoMapper;
+
+
+    @Override
+    public OrderInfo queryByRecordInfo(OrderInfo orderInfo)
+    {
+        return orderInfoMapper.queryByOrderInfo2(orderInfo);
+    }
+
+    @Override
+    public PageInfo<OrderInfo> findOrderInfoAll(int page, int limit, OrderInfo orderInfo)
+    {
+        PageHelper.startPage(page, limit);
+        List<OrderInfo> list = orderInfoMapper.queryOrderInfoByAll(orderInfo);
+        PageInfo<OrderInfo> pageInfo = new PageInfo<>(list);
+        return pageInfo;
+    }
 
     @Override
     public IPage<OrderInfo> findListByPage(Integer page, Integer pageCount)

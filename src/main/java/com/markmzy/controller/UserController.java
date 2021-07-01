@@ -109,6 +109,13 @@ public class UserController
         return object;
     }
 
+    @RequestMapping("/queryUserInfoAll")
+    public List<UserDeptVo> queryUserInfoAll()
+    {
+        PageInfo<UserDeptVo> pageInfo = userService.queryUserAll(null, 1, 15);
+        return pageInfo.getList();
+    }
+
     /**
      * 统计接口
      *

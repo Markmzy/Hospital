@@ -17,6 +17,8 @@ import org.apache.ibatis.annotations.Param;
 public interface IPatientInfoService extends IService<PatientInfo>
 {
 
+    PageInfo<PatientInfo> findUserAll(int page, int pageSize, PatientInfo patientInfo);
+
     /**
      * 查询病人信息表分页数据
      *

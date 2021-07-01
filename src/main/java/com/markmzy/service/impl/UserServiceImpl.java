@@ -77,6 +77,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return new PageInfo<>(list);
     }
 
+
     @Override
     public List<TongJi> queryTongjiCounts()
     {

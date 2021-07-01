@@ -8,7 +8,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * <p>
@@ -30,9 +29,9 @@ public class OrderInfo implements Serializable
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private String userId;
+    private Integer userId;
 
-    private Date day;
+    private String day;
 
     private String dayTime;
 
@@ -41,6 +40,10 @@ public class OrderInfo implements Serializable
     private Integer status;
 
     private Integer deptId;
+
+    private User user;
+
+    private PatientInfo patientInfo;
 
 
 }

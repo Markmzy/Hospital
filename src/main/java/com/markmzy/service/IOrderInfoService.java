@@ -2,6 +2,7 @@ package com.markmzy.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.github.pagehelper.PageInfo;
 import com.markmzy.model.OrderInfo;
 
 /**
@@ -14,6 +15,16 @@ import com.markmzy.model.OrderInfo;
  */
 public interface IOrderInfoService extends IService<OrderInfo>
 {
+    /**
+     * 查询最后一个对象
+     */
+    OrderInfo queryByRecordInfo(OrderInfo orderInfo);
+
+    /**
+     * 查询所有预约记录
+     */
+
+    PageInfo<OrderInfo> findOrderInfoAll(int page, int limit, OrderInfo orderInfo);
 
     /**
      * 查询病人的预约记录分页数据

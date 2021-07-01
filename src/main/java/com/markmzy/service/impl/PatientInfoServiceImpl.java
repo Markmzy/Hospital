@@ -29,6 +29,15 @@ public class PatientInfoServiceImpl extends ServiceImpl<PatientInfoMapper, Patie
     private PatientInfoMapper patientInfoMapper;
 
     @Override
+    public PageInfo<PatientInfo> findUserAll(int page, int pageSize, PatientInfo patientInfo)
+    {
+        PageHelper.startPage(page, pageSize);
+        List<PatientInfo> list = patientInfoMapper.queryPatientAll(patientInfo);
+        PageInfo<PatientInfo> pageInfo = new PageInfo<>(list);
+        return pageInfo;
+    }
+
+    @Override
     public IPage<PatientInfo> findListByPage(Integer page, Integer pageCount)
     {
         IPage<PatientInfo> wherePage = new Page<>(page, pageCount);
